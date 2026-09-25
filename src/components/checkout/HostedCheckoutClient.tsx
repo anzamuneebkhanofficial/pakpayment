@@ -341,7 +341,9 @@ I have attached my transfer receipt screenshot below. Please verify and confirm 
         {c.businessLogoUrl && (
           <img src={c.businessLogoUrl} alt={c.businessName} className="h-10 mx-auto mb-3 object-contain" />
         )}
-        <h1 className="text-2xl font-extrabold tracking-tight text-white">{c.businessName || 'Merchant Payment'}</h1>
+        <h1 className="text-2xl font-extrabold tracking-tight text-white">
+          {c.businessName && !/^([a-zA-Z0-9])\1{4,}$/.test(c.businessName) ? c.businessName : 'Merchant Payment'}
+        </h1>
         <h2 className="text-sm opacity-80 mt-0.5 text-neutral-300">{c.widgetTitle || 'Direct Bank & Wallet Transfer'}</h2>
         {c.widgetSubtitle && <p className="text-xs text-neutral-400 mt-1">{c.widgetSubtitle}</p>}
 
@@ -391,9 +393,9 @@ I have attached my transfer receipt screenshot below. Please verify and confirm 
                 disabled={isClaimSubmitted}
                 value={amount ?? ''}
                 onChange={(e) => setAmount(e.target.value ? Number(e.target.value) : null)}
-                placeholder="Amount"
-                className="w-28 bg-black/80 border border-neutral-800 rounded-lg px-2 py-1 text-base font-black font-mono focus:outline-none focus:border-primary sm:text-right disabled:opacity-50"
-                style={{ color: primaryColor }}
+                placeholder="0.00"
+                className="w-28 bg-black/80 border border-neutral-800 rounded-lg px-2.5 py-1 text-base font-black font-mono focus:outline-none focus:border-primary sm:text-right disabled:opacity-50 text-white placeholder-neutral-500"
+                style={{ color: amount ? primaryColor : '#ffffff' }}
               />
             </div>
 
@@ -579,7 +581,11 @@ I have attached my transfer receipt screenshot below. Please verify and confirm 
                         <p className="text-xs text-neutral-400 leading-tight mt-0.5">{m.accountName}</p>
                       </div>
                     </div>
-                    <span className="text-xs font-mono text-neutral-400">{isSelected ? '● Selected' : '○'}</span>
+                    <span className={`text-[11px] font-mono px-2 py-0.5 rounded-md font-semibold transition-colors ${
+                      isSelected ? 'bg-primary text-black' : 'bg-neutral-800 text-neutral-400'
+                    }`}>
+                      {isSelected ? 'Selected' : 'Choose'}
+                    </span>
                   </div>
 
                   {isSelected && (

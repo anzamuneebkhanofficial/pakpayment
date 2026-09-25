@@ -1,12 +1,15 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-background: #000000;
-  --color-surface: #171717;
-  --color-primary: #CCFF00;
-  --color-secondary: #FF8C42;
+  --color-background: #09090b;
+  --color-surface: #121316;
+  --color-surface-elevated: #18191f;
+  --color-primary: #C5F82A;
+  --color-primary-hover: #b5e81d;
+  --color-secondary: #FF9F43;
   --color-muted: #9CA3AF;
   --color-foreground: #FFFFFF;
+  --color-border: #27272a;
   --font-sans: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-mono: var(--font-geist-mono), monospace;
 }
@@ -16,12 +19,13 @@
 }
 
 body {
-  background-color: #000000;
+  background-color: #09090b;
   color: #FFFFFF;
   font-family: var(--font-sans);
-  overflow-x: hidden;
+  overflow-x: clip;
   margin: 0;
   padding: 0;
+  -webkit-font-smoothing: antialiased;
 }
 
 /* Custom Scrollbar for Sleek Fintech Aesthetic */
@@ -31,11 +35,11 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #000000;
+  background: #09090b;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #262626;
+  background: #27272a;
   border-radius: 9999px;
 }
 

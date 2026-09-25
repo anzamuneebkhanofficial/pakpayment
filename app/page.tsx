@@ -1,4 +1,3 @@
-// Server Component — checks session on the server and passes auth state to Navbar
 import Link from "next/link";
 import {
   ShieldCheck,
@@ -12,7 +11,6 @@ import {
   Code2,
   ExternalLink,
   CheckCircle2,
-  Star,
   Globe,
   Smartphone,
   Store,
@@ -20,6 +18,10 @@ import {
   Copy,
   TrendingUp,
   BadgeCheck,
+  Building2,
+  Layers,
+  Sparkles,
+  Server
 } from "lucide-react";
 import LandingNavbar from "@/components/landing/LandingNavbar";
 import LandingFAQ from "@/components/landing/LandingFAQ";
@@ -27,8 +29,7 @@ import LandingPlatformShowcase from "@/components/landing/LandingPlatformShowcas
 import LandingArchitecture from "@/components/landing/LandingArchitecture";
 import { getServerSession } from "@/lib/session";
 
-// Inline GitHub SVG (lucide-react v1.x doesn't export Github)
-function GithubIcon({ size = 18, className = "" }: { size?: number; className?: string }) {
+function GithubIcon({ size = 16, className = "" }: { size?: number; className?: string }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -49,89 +50,79 @@ function GithubIcon({ size = 18, className = "" }: { size?: number; className?: 
 function Hero({ isLoggedIn }: { isLoggedIn: boolean }) {
   return (
     <section className="relative overflow-hidden flex flex-col items-center text-center px-6 pt-24 pb-20 max-w-5xl mx-auto">
-      {/* Glowing orb bg */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] rounded-full bg-[#CCFF00]/5 blur-[120px] pointer-events-none" />
+      {/* Background ambient lighting */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[380px] rounded-full bg-primary/6 blur-[140px] pointer-events-none" />
 
-      {/* Pill badge */}
-      <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-neutral-900 border border-neutral-800 text-xs font-semibold text-neutral-300 mb-8 shadow-inner">
-        <span className="w-2 h-2 rounded-full bg-[#CCFF00] animate-pulse" />
-        Free · Open Source · Zero Custody · Made for Pakistan
+      {/* Eyebrow badge */}
+      <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-neutral-900 border border-neutral-800 text-xs font-semibold text-neutral-300 mb-8 shadow-sm">
+        <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+        Non-Custodial Payment Gateway & Peer-to-Merchant Infrastructure
       </div>
 
-      {/* Headline */}
-      <h1 className="text-5xl sm:text-7xl font-black tracking-tight leading-[1.08] mb-6 text-white">
-        Accept Payments{" "}
-        <span className="text-[#CCFF00]">Directly.</span>
-        <br />
-        <span className="bg-gradient-to-r from-white via-neutral-200 to-neutral-500 bg-clip-text text-transparent">
-          No Gateway. No Fees. Ever.
-        </span>
+      {/* Main Headline */}
+      <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight leading-[1.08] mb-6 text-white max-w-4xl">
+        Accept Direct Bank &amp; Wallet Payments in Pakistan
       </h1>
 
-      {/* Trust quote */}
-      <div className="my-4 px-6 py-3 rounded-2xl bg-[#CCFF00]/8 border border-[#CCFF00]/20 inline-block">
-        <p className="text-xl sm:text-2xl font-black text-[#CCFF00] tracking-tight">
-          &quot;We never touch your money.&quot;
-        </p>
-      </div>
-
-      {/* Sub copy */}
-      <p className="text-base sm:text-lg text-neutral-400 max-w-2xl mt-4 mb-10 leading-relaxed">
-        PakPayment lets freelancers, creators, and online stores collect direct
-        bank transfers, JazzCash, EasyPaisa, and crypto — with a hosted payment
-        link, embeddable widget, and a fully auditable merchant dashboard.
-        Completely free, forever.
+      {/* Direct Value Proposition */}
+      <p className="text-base sm:text-xl text-neutral-300 max-w-2xl mt-2 mb-4 font-medium leading-relaxed">
+        Zero Gateway Fees. Zero Fund Custody. Built for Local Reality.
       </p>
 
-      {/* CTAs — swap based on auth */}
+      {/* Sub copy */}
+      <p className="text-sm sm:text-base text-neutral-400 max-w-2xl mb-10 leading-relaxed">
+        PakPayment allows Pakistani businesses, freelancers, and online stores to collect direct payments via Meezan, HBL, JazzCash, EasyPaisa, and Crypto — with hosted checkout portals, embeddable widgets, and automated HMAC webhook fulfillment.
+      </p>
+
+      {/* CTAs */}
       <div className="flex flex-col sm:flex-row items-center gap-4 w-full justify-center">
         {isLoggedIn ? (
           <Link
             href="/dashboard"
             id="hero-cta-dashboard"
-            className="w-full sm:w-auto bg-[#CCFF00] text-black text-base font-black px-8 py-4 rounded-2xl hover:brightness-95 active:scale-95 transition-all shadow-[0_0_30px_rgba(204,255,0,0.3)] flex items-center justify-center gap-2"
+            className="w-full sm:w-auto bg-primary text-black text-sm font-bold px-8 py-3.5 rounded-xl hover:brightness-105 active:scale-95 transition-all shadow-[0_0_20px_rgba(197,248,42,0.25)] flex items-center justify-center gap-2"
           >
-            Go to Dashboard <ArrowRight size={18} />
+            Open Merchant Dashboard <ArrowRight size={16} />
           </Link>
         ) : (
           <>
             <Link
               href="/sign-up"
               id="hero-cta-signup"
-              className="w-full sm:w-auto bg-[#CCFF00] text-black text-base font-black px-8 py-4 rounded-2xl hover:brightness-95 active:scale-95 transition-all shadow-[0_0_30px_rgba(204,255,0,0.3)] flex items-center justify-center gap-2"
+              className="w-full sm:w-auto bg-primary text-black text-sm font-bold px-8 py-3.5 rounded-xl hover:brightness-105 active:scale-95 transition-all shadow-[0_0_20px_rgba(197,248,42,0.25)] flex items-center justify-center gap-2"
             >
-              Start Collecting Payments <ArrowRight size={18} />
+              Start Collecting Payments <ArrowRight size={16} />
             </Link>
             <a
-              href="#how-it-works"
+              href="#architecture"
               id="hero-cta-howto"
-              className="w-full sm:w-auto bg-neutral-900 border border-neutral-800 text-neutral-300 hover:text-white px-8 py-4 rounded-2xl text-base font-bold transition-colors flex items-center justify-center gap-2"
+              className="w-full sm:w-auto bg-neutral-900 border border-neutral-800 text-neutral-300 hover:text-white px-8 py-3.5 rounded-xl text-sm font-semibold transition-colors flex items-center justify-center gap-2 hover:border-neutral-700"
             >
-              See How It Works
+              Explore Architecture
             </a>
           </>
         )}
       </div>
 
-      <p className="text-xs text-neutral-500 font-semibold mt-4">
+      <p className="text-xs text-neutral-500 font-medium mt-4">
         {isLoggedIn
-          ? "Welcome back! Your dashboard is ready."
-          : "Free, forever, for everyone. No credit card. No KYC. No hidden fees."}
+          ? "Authenticated session active. Ready for live transactions."
+          : "Free and open source. No credit card required. Zero paperwork or KYC delays."}
       </p>
 
-      {/* Trust row */}
-      <div className="mt-12 flex flex-wrap justify-center gap-5">
+      {/* Trust bar */}
+      <div className="mt-12 flex flex-wrap justify-center gap-6 pt-6 border-t border-neutral-900 w-full max-w-3xl">
         {[
-          { icon: <ShieldCheck size={15} />, label: "Zero Custody of Funds" },
-          { icon: <BadgeCheck size={15} />, label: "100% Free, No Fees" },
+          { icon: <ShieldCheck size={15} />, label: "100% Non-Custodial" },
+          { icon: <BadgeCheck size={15} />, label: "0% Transaction Fees" },
           { icon: <GithubIcon size={15} />, label: "Open Source on GitHub" },
           { icon: <Lock size={15} />, label: "Auditable Claims Ledger" },
         ].map((t) => (
           <div
             key={t.label}
-            className="flex items-center gap-2 text-xs text-neutral-400 font-semibold"
+            className="flex items-center gap-2 text-xs text-neutral-400 font-medium"
           >
-            <span className="text-[#CCFF00]">{t.icon}</span>
+            <span className="text-primary">{t.icon}</span>
             {t.label}
           </div>
         ))}
@@ -145,20 +136,20 @@ function Hero({ isLoggedIn }: { isLoggedIn: boolean }) {
 ───────────────────────────────────────────── */
 function StatsBar() {
   const stats = [
-    { value: "0%", label: "Platform Fees — Ever" },
-    { value: "5+", label: "Payment Methods Supported" },
-    { value: "100%", label: "Direct Peer-to-Merchant" },
-    { value: "∞", label: "Free Accounts, No Limits" },
+    { value: "0%", label: "Platform Fees Forever" },
+    { value: "5+", label: "Local & Global Rails" },
+    { value: "100%", label: "Direct Peer Settlement" },
+    { value: "< 2 min", label: "Instant Onboarding Time" },
   ];
   return (
-    <section className="w-full border-y border-neutral-800/60 bg-neutral-900/30">
-      <div className="max-w-5xl mx-auto px-6 py-10 grid grid-cols-2 md:grid-cols-4 gap-8">
+    <section className="w-full border-y border-border/80 bg-surface/30">
+      <div className="max-w-6xl mx-auto px-6 py-8 grid grid-cols-2 md:grid-cols-4 gap-6">
         {stats.map((s) => (
-          <div key={s.label} className="text-center">
-            <p className="text-4xl sm:text-5xl font-black text-[#CCFF00]">
+          <div key={s.label} className="text-center sm:text-left pl-2 border-l border-neutral-800/80">
+            <p className="text-2xl sm:text-3xl font-black text-white font-mono tracking-tight">
               {s.value}
             </p>
-            <p className="text-xs text-neutral-400 font-semibold mt-2 leading-snug">
+            <p className="text-xs text-neutral-400 font-medium mt-1 leading-snug">
               {s.label}
             </p>
           </div>
@@ -174,72 +165,57 @@ function StatsBar() {
 function HowItWorks() {
   const steps = [
     {
-      step: "01",
-      icon: <Wallet size={26} />,
-      color: "text-[#CCFF00]",
-      borderColor: "border-[#CCFF00]/20",
-      bgColor: "bg-[#CCFF00]/8",
-      title: "Customer Transfers Directly",
-      desc: "Your hosted checkout page displays your bank IBAN, JazzCash, or EasyPaisa number. The customer opens their own banking app and sends the money directly to you — PakPayment is never in the loop.",
+      stage: "Stage 01",
+      icon: <Wallet size={22} />,
+      title: "Direct Customer Transfer",
+      desc: "Your checkout portal presents your bank IBAN, JazzCash, or EasyPaisa credentials. The buyer transfers exact funds directly inside their personal mobile banking app.",
     },
     {
-      step: "02",
-      icon: <MessageCircle size={26} />,
-      color: "text-[#FF8C42]",
-      borderColor: "border-[#FF8C42]/20",
-      bgColor: "bg-[#FF8C42]/8",
-      title: "Customer Submits Proof",
-      desc: "After paying, the customer enters their transaction reference ID on the checkout page and taps a single button to send the confirmation screenshot to your WhatsApp instantly.",
+      stage: "Stage 02",
+      icon: <MessageCircle size={22} />,
+      title: "Instant Proof Submission",
+      desc: "The buyer submits their TRX reference ID on the checkout page and transmits their payment screenshot directly to your WhatsApp with a single pre-formatted tap.",
     },
     {
-      step: "03",
-      icon: <ShieldCheck size={26} />,
-      color: "text-green-400",
-      borderColor: "border-green-500/20",
-      bgColor: "bg-green-500/8",
-      title: "You Verify & Confirm",
-      desc: "Check the deposit in your own bank app, then open your merchant dashboard and confirm or reject the payment claim. Every action is logged in your fully auditable claims ledger.",
+      stage: "Stage 03",
+      icon: <CheckCircle2 size={22} />,
+      title: "Merchant Verification & Webhook Sync",
+      desc: "You verify the incoming deposit inside your bank account, then click Confirm in your dashboard. An automated HMAC webhook immediately updates your store order to Paid.",
     },
   ];
 
   return (
-    <section
-      id="how-it-works"
-      className="max-w-5xl mx-auto px-6 py-24 scroll-mt-20"
-    >
+    <section id="how-it-works" className="max-w-6xl mx-auto px-6 py-24 scroll-mt-20">
       <div className="text-center mb-16">
-        <span className="text-xs font-bold uppercase tracking-widest text-[#CCFF00] mb-3 block">
-          How It Works
-        </span>
-        <h2 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-white">
-          Simple as 1 – 2 – 3
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neutral-900 border border-neutral-800 text-[11px] font-mono font-semibold text-neutral-300 mb-4 shadow-sm">
+          <Zap size={12} className="text-primary" /> Streamlined Transaction Flow
+        </div>
+        <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-white leading-tight">
+          How PakPayment Works
         </h2>
-        <p className="text-neutral-400 mt-4 max-w-lg mx-auto leading-relaxed">
-          Zero custody, zero gateway. 100% direct peer-to-merchant transfers,
-          verified by you.
+        <p className="text-neutral-400 mt-4 max-w-xl mx-auto text-sm sm:text-base leading-relaxed">
+          Zero middleman custody. 100% peer-to-merchant transfers confirmed directly by you.
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 relative">
-        <div className="hidden md:block absolute top-16 left-[33%] right-[33%] h-px bg-gradient-to-r from-[#CCFF00]/20 via-[#FF8C42]/20 to-green-500/20" />
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {steps.map((s) => (
           <div
-            key={s.step}
-            className="bg-[#171717] border border-neutral-800/80 p-8 rounded-3xl relative overflow-hidden group hover:border-neutral-700 transition-all hover:-translate-y-1 duration-300"
+            key={s.stage}
+            className="bg-surface border border-neutral-800 rounded-2xl p-6 sm:p-8 flex flex-col justify-between hover:border-neutral-700 transition-colors"
           >
-            <div className="absolute bottom-4 right-6 text-7xl font-black text-white/4 select-none">
-              {s.step}
+            <div>
+              <div className="flex items-center justify-between mb-6">
+                <span className="text-[11px] font-mono font-bold text-primary px-2.5 py-1 rounded-md bg-neutral-900 border border-neutral-800">
+                  {s.stage}
+                </span>
+                <div className="text-neutral-400">
+                  {s.icon}
+                </div>
+              </div>
+              <h3 className="text-base font-bold text-white mb-2">{s.title}</h3>
+              <p className="text-xs sm:text-sm text-neutral-400 leading-relaxed">{s.desc}</p>
             </div>
-            <div
-              className={`w-14 h-14 ${s.bgColor} rounded-2xl border ${s.borderColor} flex items-center justify-center mb-6 ${s.color}`}
-            >
-              {s.icon}
-            </div>
-            <span className={`text-xs font-bold font-mono ${s.color} uppercase tracking-wider`}>
-              Step {s.step}
-            </span>
-            <h3 className="text-xl font-bold text-white mt-2 mb-3">{s.title}</h3>
-            <p className="text-sm text-neutral-400 leading-relaxed">{s.desc}</p>
           </div>
         ))}
       </div>
@@ -248,46 +224,55 @@ function HowItWorks() {
 }
 
 /* ─────────────────────────────────────────────
-   PAYMENT METHODS
+   PAYMENT RAILS
 ───────────────────────────────────────────── */
-function PaymentMethods() {
-  const methods = [
-    { name: "Bank Transfer", detail: "Any Pakistani bank via IBAN", emoji: "🏦", color: "border-blue-500/30 bg-blue-500/5", tag: "Direct" },
-    { name: "JazzCash", detail: "Pakistan's #1 mobile wallet", emoji: "🟠", color: "border-orange-500/30 bg-orange-500/5", tag: "MFS" },
-    { name: "EasyPaisa", detail: "Telenor digital payments", emoji: "🟢", color: "border-green-500/30 bg-green-500/5", tag: "MFS" },
-    { name: "Crypto", detail: "USDT / BTC / ETH wallets", emoji: "₿", color: "border-yellow-500/30 bg-yellow-500/5", tag: "Crypto" },
-    { name: "Cash on Counter", detail: "QR code for physical stores", emoji: "🏪", color: "border-purple-500/30 bg-purple-500/5", tag: "Offline" },
+function PaymentRails() {
+  const rails = [
+    { name: "Bank Transfer", detail: "Meezan, HBL, Alfalah via IBAN / Raast", icon: Building2, tag: "Instant Raast" },
+    { name: "JazzCash", detail: "Pakistan's premier mobile financial wallet", icon: Smartphone, tag: "MFS Direct" },
+    { name: "EasyPaisa", detail: "Telenor digital payments & QR", icon: Smartphone, tag: "MFS Direct" },
+    { name: "Cryptocurrency", detail: "USDT (TRC-20), BTC, ETH decentralized", icon: Wallet, tag: "Zero Chargeback" },
+    { name: "Cash on Counter", detail: "Printable QR display for shops & stalls", icon: QrCode, tag: "POS Ready" },
   ];
+
   return (
-    <section className="w-full bg-neutral-900/30 border-y border-neutral-800/60 py-20 px-6">
-      <div className="max-w-5xl mx-auto">
+    <section id="rails" className="w-full bg-surface/30 border-y border-border/80 py-20 px-6 scroll-mt-20">
+      <div className="max-w-6xl mx-auto">
         <div className="text-center mb-12">
-          <span className="text-xs font-bold uppercase tracking-widest text-[#CCFF00] mb-3 block">
-            Payment Methods
-          </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white">
-            Every way your customers want to pay
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neutral-900 border border-neutral-800 text-[11px] font-mono font-semibold text-neutral-300 mb-4 shadow-sm">
+            <Building2 size={12} className="text-primary" /> Supported Payment Rails
+          </div>
+          <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight">
+            Every Way Pakistani Customers Prefer to Pay
           </h2>
-          <p className="text-neutral-400 mt-3 max-w-lg mx-auto text-sm leading-relaxed">
-            Add all your account details once, and your checkout page shows them all.
+          <p className="text-neutral-400 mt-3 max-w-xl mx-auto text-sm leading-relaxed">
+            Configure your accounts once in the dashboard. Your hosted checkout and widget instantly support them all.
           </p>
         </div>
-        <div className="flex flex-wrap justify-center gap-4">
-          {methods.map((m) => (
-            <div
-              key={m.name}
-              className={`flex items-center gap-4 px-6 py-4 rounded-2xl border ${m.color} hover:-translate-y-0.5 transition-transform duration-200 min-w-[200px]`}
-            >
-              <span className="text-3xl">{m.emoji}</span>
-              <div>
-                <p className="font-bold text-white text-sm">{m.name}</p>
-                <p className="text-xs text-neutral-400 mt-0.5">{m.detail}</p>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {rails.map((r) => {
+            const Icon = r.icon;
+            return (
+              <div
+                key={r.name}
+                className="p-5 rounded-2xl bg-neutral-950 border border-neutral-800/90 flex items-center justify-between hover:border-neutral-700 transition-colors"
+              >
+                <div className="flex items-center gap-3.5">
+                  <div className="w-10 h-10 rounded-xl bg-neutral-900 border border-neutral-800 flex items-center justify-center text-primary shrink-0">
+                    <Icon size={18} />
+                  </div>
+                  <div>
+                    <h4 className="text-sm font-bold text-white">{r.name}</h4>
+                    <p className="text-xs text-neutral-400 mt-0.5">{r.detail}</p>
+                  </div>
+                </div>
+                <span className="text-[10px] font-mono font-semibold px-2 py-0.5 rounded bg-neutral-900 text-neutral-400 border border-neutral-800 shrink-0">
+                  {r.tag}
+                </span>
               </div>
-              <span className="ml-auto text-xs font-bold px-2 py-0.5 rounded-full bg-neutral-800 text-neutral-400">
-                {m.tag}
-              </span>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
@@ -295,122 +280,293 @@ function PaymentMethods() {
 }
 
 /* ─────────────────────────────────────────────
-   FEATURES GRID
+   FEATURES GRID (ASYMMETRIC BENTO)
 ───────────────────────────────────────────── */
 function Features() {
-  const features = [
-    { icon: <Globe size={22} />, color: "text-[#CCFF00]", bg: "bg-[#CCFF00]/8 border-[#CCFF00]/20", title: "Hosted Payment Page", desc: "Every merchant gets a beautiful, branded checkout page at /pay/your-id. Share the link in Instagram bio, WhatsApp status, or any DM — no website needed." },
-    { icon: <Code2 size={22} />, color: "text-[#FF8C42]", bg: "bg-[#FF8C42]/8 border-[#FF8C42]/20", title: "Embeddable Widget", desc: "Already have a website? Drop a single <script> tag and our payment widget appears on any page — Shopify, WordPress, or raw HTML." },
-    { icon: <QrCode size={22} />, color: "text-purple-400", bg: "bg-purple-500/8 border-purple-500/20", title: "Counter QR Codes", desc: "Generate a printable, professional QR code for your physical shop counter or market stall. Open-amount or fixed-amount — your choice." },
-    { icon: <Lock size={22} />, color: "text-blue-400", bg: "bg-blue-500/8 border-blue-500/20", title: "Auditable Claims Ledger", desc: "Every payment claim — transaction reference, customer contact, amount, and proof screenshot — is logged and searchable in your merchant dashboard." },
-    { icon: <MessageCircle size={22} />, color: "text-green-400", bg: "bg-green-500/8 border-green-500/20", title: "WhatsApp Integration", desc: "Customers send payment proof directly to your WhatsApp with one tap — pre-filled message with order details. No manual copy-paste." },
-    { icon: <BarChart3 size={22} />, color: "text-[#FF8C42]", bg: "bg-[#FF8C42]/8 border-[#FF8C42]/20", title: "Analytics Dashboard", desc: "Track widget views, payment conversion, confirmed revenue, and pending claims — all in one place. Know exactly what's performing." },
-    { icon: <Zap size={22} />, color: "text-yellow-400", bg: "bg-yellow-500/8 border-yellow-500/20", title: "Instant Account Setup", desc: "Sign up, add your payment accounts, and get your live payment link in under 2 minutes. No approval, no KYC, no waiting." },
-    { icon: <ShieldCheck size={22} />, color: "text-[#CCFF00]", bg: "bg-[#CCFF00]/8 border-[#CCFF00]/20", title: "Zero Custody, Always", desc: "PakPayment never holds, touches, or processes your money. Every rupee goes directly from your customer to your bank account." },
-    { icon: <Copy size={22} />, color: "text-pink-400", bg: "bg-pink-500/8 border-pink-500/20", title: "Appearance Customization", desc: "Customize your checkout widget colors, business name, logo, and description so it matches your brand perfectly." },
-  ];
-
   return (
     <section id="features" className="max-w-6xl mx-auto px-6 py-24 scroll-mt-20">
       <div className="text-center mb-16">
-        <span className="text-xs font-bold uppercase tracking-widest text-[#CCFF00] mb-3 block">
-          Features
-        </span>
-        <h2 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-white">
-          Everything you need to collect payments
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neutral-900 border border-neutral-800 text-[11px] font-mono font-semibold text-neutral-300 mb-4 shadow-sm">
+          <Layers size={12} className="text-primary" /> Full-Featured Architecture
+        </div>
+        <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-white leading-tight">
+          Everything You Need to Collect Direct Payments
         </h2>
-        <p className="text-neutral-400 mt-4 max-w-xl mx-auto leading-relaxed">
-          A complete payment infrastructure — built for Pakistan&apos;s reality, not a Western card-first market.
+        <p className="text-neutral-400 mt-4 max-w-xl mx-auto text-sm sm:text-base leading-relaxed">
+          Engineered for Pakistan’s emerging digital commerce landscape — eliminating chargebacks, middleman fees, and payout delays.
         </p>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-        {features.map((f) => (
-          <div
-            key={f.title}
-            className="bg-[#171717] border border-neutral-800/80 p-7 rounded-3xl hover:border-neutral-700 hover:-translate-y-1 transition-all duration-300 group"
-          >
-            <div className={`w-12 h-12 rounded-2xl border ${f.bg} flex items-center justify-center mb-5 ${f.color} group-hover:scale-110 transition-transform`}>
-              {f.icon}
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {/* Bento 1: Hosted Payment Portal */}
+        <div className="md:col-span-2 bg-surface border border-neutral-800 rounded-3xl p-8 flex flex-col justify-between">
+          <div>
+            <div className="w-10 h-10 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary mb-5">
+              <Globe size={20} />
             </div>
-            <h3 className="text-lg font-bold text-white mb-2">{f.title}</h3>
-            <p className="text-sm text-neutral-400 leading-relaxed">{f.desc}</p>
+            <h3 className="text-xl font-bold text-white mb-2">Hosted Payment Portal</h3>
+            <p className="text-sm text-neutral-400 leading-relaxed max-w-lg">
+              Every merchant receives a dedicated, mobile-optimized payment portal at <code>/pay/your-id</code>. Share the URL directly in Instagram bio, WhatsApp messages, or invoices without building or maintaining a website.
+            </p>
           </div>
-        ))}
+          <div className="mt-6 pt-4 border-t border-neutral-800/80 flex items-center justify-between text-xs text-neutral-400 font-mono">
+            <span>Instant URL generation</span>
+            <span className="text-primary">100% Mobile Responsive</span>
+          </div>
+        </div>
+
+        {/* Bento 2: 1-Click WhatsApp Proof */}
+        <div className="bg-surface border border-neutral-800 rounded-3xl p-8 flex flex-col justify-between">
+          <div>
+            <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 mb-5">
+              <MessageCircle size={20} />
+            </div>
+            <h3 className="text-lg font-bold text-white mb-2">WhatsApp Proof Flow</h3>
+            <p className="text-xs sm:text-sm text-neutral-400 leading-relaxed">
+              Customers submit receipts with one tap. WhatsApp launches with pre-filled order ID, amount, and TRX code ready to send to your support chat.
+            </p>
+          </div>
+          <div className="mt-6 pt-4 border-t border-neutral-800/80 text-xs text-neutral-400 font-mono">
+            Pre-configured templates
+          </div>
+        </div>
+
+        {/* Bento 3: Auditable Claims Ledger */}
+        <div className="bg-surface border border-neutral-800 rounded-3xl p-8 flex flex-col justify-between">
+          <div>
+            <div className="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400 mb-5">
+              <CheckCircle2 size={20} />
+            </div>
+            <h3 className="text-lg font-bold text-white mb-2">Auditable Claims Ledger</h3>
+            <p className="text-xs sm:text-sm text-neutral-400 leading-relaxed">
+              Every customer transaction claim is timestamped and tracked. Review buyer phone numbers, TRX codes, and mark claims Confirmed or Rejected with one click.
+            </p>
+          </div>
+          <div className="mt-6 pt-4 border-t border-neutral-800/80 text-xs text-neutral-400 font-mono">
+            Zero duplicate reference collisions
+          </div>
+        </div>
+
+        {/* Bento 4: Counter POS QR Codes */}
+        <div className="bg-surface border border-neutral-800 rounded-3xl p-8 flex flex-col justify-between">
+          <div>
+            <div className="w-10 h-10 rounded-xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 mb-5">
+              <QrCode size={20} />
+            </div>
+            <h3 className="text-lg font-bold text-white mb-2">Counter QR Generator</h3>
+            <p className="text-xs sm:text-sm text-neutral-400 leading-relaxed">
+              Generate crisp, printable branded QR codes for physical shop counters, exhibition stalls, or printed invoice flyers. Supports open or locked invoice sums.
+            </p>
+          </div>
+          <div className="mt-6 pt-4 border-t border-neutral-800/80 text-xs text-neutral-400 font-mono">
+            High-res PNG export included
+          </div>
+        </div>
+
+        {/* Bento 5: Server-Locked HMAC Webhooks */}
+        <div className="bg-surface border border-neutral-800 rounded-3xl p-8 flex flex-col justify-between">
+          <div>
+            <div className="w-10 h-10 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary mb-5">
+              <Lock size={20} />
+            </div>
+            <h3 className="text-lg font-bold text-white mb-2">HMAC-SHA256 Webhooks</h3>
+            <p className="text-xs sm:text-sm text-neutral-400 leading-relaxed">
+              Cryptographically signed webhooks notify your store in real time upon merchant verification, automatically shifting WooCommerce/Shopify orders to Processing.
+            </p>
+          </div>
+          <div className="mt-6 pt-4 border-t border-neutral-800/80 text-xs text-neutral-400 font-mono">
+            Signature header: X-PakPayment-Signature
+          </div>
+        </div>
       </div>
     </section>
   );
 }
 
 /* ─────────────────────────────────────────────
-   USE CASES
+   TWO WAYS TO USE: WITH OR WITHOUT A WEBSITE
 ───────────────────────────────────────────── */
-function UseCases() {
-  const cases = [
+function TwoWaysToUse() {
+  return (
+    <section id="use-cases" className="max-w-6xl mx-auto px-6 py-24 scroll-mt-20">
+      <div className="text-center mb-16">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neutral-900 border border-neutral-800 text-[11px] font-mono font-semibold text-neutral-300 mb-4 shadow-sm">
+          <Layers size={12} className="text-primary" /> Flexible Integration Modes
+        </div>
+        <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-white leading-tight">
+          How You Can Use PakPayment
+        </h2>
+        <p className="text-neutral-400 mt-4 max-w-2xl mx-auto text-sm sm:text-base leading-relaxed">
+          Engineered to adapt to your business — whether you operate a high-volume online store or sell directly on WhatsApp and Instagram with zero coding or hosting.
+        </p>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {/* PATH A: I HAVE A WEBSITE */}
+        <div className="bg-surface border border-neutral-800 rounded-3xl p-8 sm:p-10 flex flex-col justify-between relative overflow-hidden group hover:border-neutral-700 transition-colors">
+          <div className="absolute top-0 right-0 w-48 h-48 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
+          <div>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-primary/10 border border-primary/20 text-xs font-mono font-bold text-primary mb-6">
+              <Globe size={13} /> OPTION 01
+            </div>
+            <h3 className="text-2xl font-bold text-white mb-3">
+              "I Have an Online Website or Store"
+            </h3>
+            <p className="text-sm text-neutral-400 leading-relaxed mb-8">
+              Connect your existing web store in under 2 minutes. Receive real-time order status updates when you approve payments.
+            </p>
+
+            <div className="space-y-4 text-xs sm:text-sm">
+              <div className="p-4 rounded-xl bg-neutral-950 border border-neutral-800/80 flex items-start gap-3">
+                <Store size={18} className="text-primary shrink-0 mt-0.5" />
+                <div>
+                  <h4 className="font-bold text-white">WooCommerce &amp; WordPress</h4>
+                  <p className="text-neutral-400 text-xs mt-0.5">Download our pre-packaged 1-click plugin zip, upload to WordPress, and automate order fulfillment via webhooks.</p>
+                </div>
+              </div>
+
+              <div className="p-4 rounded-xl bg-neutral-950 border border-neutral-800/80 flex items-start gap-3">
+                <Code2 size={18} className="text-primary shrink-0 mt-0.5" />
+                <div>
+                  <h4 className="font-bold text-white">Universal HTML &amp; PHP Script</h4>
+                  <p className="text-neutral-400 text-xs mt-0.5">Embed a 2-line &lt;script&gt; tag on any custom website, Webflow, or Shopify theme for an instant checkout modal.</p>
+                </div>
+              </div>
+
+              <div className="p-4 rounded-xl bg-neutral-950 border border-neutral-800/80 flex items-start gap-3">
+                <Server size={18} className="text-primary shrink-0 mt-0.5" />
+                <div>
+                  <h4 className="font-bold text-white">React &amp; Next.js 16 SDK</h4>
+                  <p className="text-neutral-400 text-xs mt-0.5">Directly import our &lt;PakPaymentCheckout /&gt; component with TypeScript types and custom styling hooks.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-8 pt-6 border-t border-neutral-800/80 flex items-center justify-between text-xs font-mono text-neutral-400">
+            <span>Includes HMAC Webhooks</span>
+            <span className="text-primary font-bold">Auto-Syncs Order Status</span>
+          </div>
+        </div>
+
+        {/* PATH B: I DO NOT HAVE A WEBSITE */}
+        <div className="bg-surface border border-neutral-800 rounded-3xl p-8 sm:p-10 flex flex-col justify-between relative overflow-hidden group hover:border-neutral-700 transition-colors">
+          <div className="absolute top-0 right-0 w-48 h-48 bg-emerald-500/5 rounded-full blur-3xl pointer-events-none" />
+          <div>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-emerald-500/10 border border-emerald-500/20 text-xs font-mono font-bold text-emerald-400 mb-6">
+              <Smartphone size={13} /> OPTION 02
+            </div>
+            <h3 className="text-2xl font-bold text-white mb-3">
+              "I Do NOT Have a Website"
+            </h3>
+            <p className="text-sm text-neutral-400 leading-relaxed mb-8">
+              No developer, hosting, or website required. We host your mobile-optimized checkout portal for you completely free.
+            </p>
+
+            <div className="space-y-4 text-xs sm:text-sm">
+              <div className="p-4 rounded-xl bg-neutral-950 border border-neutral-800/80 flex items-start gap-3">
+                <ExternalLink size={18} className="text-emerald-400 shrink-0 mt-0.5" />
+                <div>
+                  <h4 className="font-bold text-white">Instagram Bio &amp; Social Links</h4>
+                  <p className="text-neutral-400 text-xs mt-0.5">Put your permanent /pay/your-id link directly in your Instagram, TikTok, or Facebook bio for one-tap payments.</p>
+                </div>
+              </div>
+
+              <div className="p-4 rounded-xl bg-neutral-950 border border-neutral-800/80 flex items-start gap-3">
+                <MessageCircle size={18} className="text-emerald-400 shrink-0 mt-0.5" />
+                <div>
+                  <h4 className="font-bold text-white">WhatsApp 1-Tap Order Proofs</h4>
+                  <p className="text-neutral-400 text-xs mt-0.5">Buyers send payments and tap one button to transmit pre-formatted order details and screenshots straight to your WhatsApp.</p>
+                </div>
+              </div>
+
+              <div className="p-4 rounded-xl bg-neutral-950 border border-neutral-800/80 flex items-start gap-3">
+                <QrCode size={18} className="text-emerald-400 shrink-0 mt-0.5" />
+                <div>
+                  <h4 className="font-bold text-white">Physical Shop Counter QR Code</h4>
+                  <p className="text-neutral-400 text-xs mt-0.5">Generate and print high-resolution QR standees for physical retail counters, exhibition stalls, and invoices.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-8 pt-6 border-t border-neutral-800/80 flex items-center justify-between text-xs font-mono text-neutral-400">
+            <span>Zero Hosting Required</span>
+            <span className="text-emerald-400 font-bold">100% Free &amp; Instant</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ─────────────────────────────────────────────
+   WHO IS IT FOR?
+───────────────────────────────────────────── */
+function WhoIsItFor() {
+  const audiences = [
     {
-      emoji: "👨‍💻",
-      audience: "Freelancers & Agencies",
-      color: "border-[#CCFF00]/30",
-      accent: "text-[#CCFF00]",
-      scenarios: [
-        "Share payment link with international/local clients",
-        "Accept PKR via bank or JazzCash invoice payment",
-        "Log every payment with proof for your records",
-        "No payment gateway approval needed",
+      title: "WooCommerce & Shopify Stores",
+      desc: "Stop paying 2% to 4% transaction fees on every sale. Give customers a native Pakistani bank/wallet payment rail with automatic status updates upon approval.",
+      bullets: [
+        "Pre-packaged 1-click WooCommerce plugin",
+        "Automated HMAC order fulfillment",
+        "Zero merchant setup fees or hidden cuts",
       ],
     },
     {
-      emoji: "🛍️",
-      audience: "Instagram & WhatsApp Sellers",
-      color: "border-[#FF8C42]/30",
-      accent: "text-[#FF8C42]",
-      scenarios: [
-        "Put your /pay link in Instagram bio",
-        "Share in WhatsApp Status — customers pay directly",
-        "Receive proof in WhatsApp from every buyer",
-        "Track all orders in one dashboard",
+      title: "Freelancers & Digital Agencies",
+      desc: "Collect client retainers and project invoices via direct bank deposit or JazzCash. Send a clean branded payment link with automatic receipt logging.",
+      bullets: [
+        "Customizable payment link for invoices",
+        "Shareable via email, WhatsApp, or Slack",
+        "Auditable payment claim records",
       ],
     },
     {
-      emoji: "🏪",
-      audience: "Physical Shops & Markets",
-      color: "border-purple-400/30",
-      accent: "text-purple-400",
-      scenarios: [
-        "Print a QR code for your shop counter",
-        "Customers scan and pay via JazzCash/EasyPaisa",
-        "Fixed or open-amount QR options available",
-        "Zero POS hardware required",
+      title: "Instagram & WhatsApp Sellers",
+      desc: "Turn your social DM buyers into organized orders. Place your /pay URL in your bio and receive organized TRX proofs on WhatsApp instead of messy screenshots.",
+      bullets: [
+        "Place live link in Instagram Bio",
+        "One-tap buyer receipt submission",
+        "Complete customer database tracking",
       ],
     },
   ];
 
   return (
-    <section id="use-cases" className="w-full bg-neutral-900/30 border-y border-neutral-800/60 py-24 px-6 scroll-mt-20">
+    <section className="w-full bg-surface/30 border-y border-border/80 py-24 px-6">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
-          <span className="text-xs font-bold uppercase tracking-widest text-[#CCFF00] mb-3 block">
-            Who Is It For?
-          </span>
-          <h2 className="text-4xl sm:text-5xl font-extrabold text-white">
-            Built for every Pakistani seller
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neutral-900 border border-neutral-800 text-[11px] font-mono font-semibold text-neutral-300 mb-4 shadow-sm">
+            <Users size={12} className="text-primary" /> Target Audiences
+          </div>
+          <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight">
+            Built for the Realities of Pakistani Commerce
           </h2>
-          <p className="text-neutral-400 mt-4 max-w-lg mx-auto leading-relaxed">
-            Whether you have a full website or just an Instagram page — PakPayment works for you.
+          <p className="text-neutral-400 mt-3 max-w-xl mx-auto text-sm leading-relaxed">
+            Whether you run a high-volume WordPress storefront, an agency, or a boutique Instagram catalog.
           </p>
         </div>
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {cases.map((c) => (
-            <div key={c.audience} className={`bg-[#171717] border ${c.color} p-8 rounded-3xl hover:-translate-y-1 transition-transform duration-300`}>
-              <div className="text-5xl mb-5">{c.emoji}</div>
-              <h3 className={`text-xl font-bold mb-5 ${c.accent}`}>{c.audience}</h3>
-              <ul className="space-y-3">
-                {c.scenarios.map((s) => (
-                  <li key={s} className="flex items-start gap-3 text-sm text-neutral-300">
-                    <CheckCircle2 size={16} className={`${c.accent} shrink-0 mt-0.5`} />
-                    {s}
-                  </li>
-                ))}
-              </ul>
+          {audiences.map((a) => (
+            <div
+              key={a.title}
+              className="bg-neutral-950 border border-neutral-800 rounded-3xl p-6 sm:p-8 flex flex-col justify-between"
+            >
+              <div>
+                <h3 className="text-base font-bold text-white mb-2">{a.title}</h3>
+                <p className="text-xs sm:text-sm text-neutral-400 leading-relaxed mb-6">{a.desc}</p>
+                <ul className="space-y-2.5 text-xs text-neutral-300">
+                  {a.bullets.map((b) => (
+                    <li key={b} className="flex items-start gap-2">
+                      <span className="text-primary font-bold mt-0.5">✓</span>
+                      <span>{b}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
           ))}
         </div>
@@ -420,46 +576,43 @@ function UseCases() {
 }
 
 /* ─────────────────────────────────────────────
-   GET STARTED STEPS
+   GETTING STARTED (2-MIN ONBOARDING)
 ───────────────────────────────────────────── */
-function GetStarted() {
+function GettingStarted() {
   const steps = [
-    { num: "1", title: "Create your free account", desc: "Sign up with just your email. No credit card, no KYC, no approval process." },
-    { num: "2", title: "Add your payment accounts", desc: "Enter your bank IBAN, JazzCash number, EasyPaisa account, or crypto wallet address." },
-    { num: "3", title: "Share your payment link", desc: "Copy your unique /pay/your-id link and paste it anywhere — Instagram, WhatsApp, email, or your website." },
-    { num: "4", title: "Verify & track payments", desc: "Open your dashboard to review payment claims, confirm deposits, and track your full payment history." },
+    { num: "01", title: "Create Free Account", desc: "Sign up with your email. No credit card or merchant approval required." },
+    { num: "02", title: "Add Payment Accounts", desc: "Enter your bank IBAN, JazzCash number, EasyPaisa, or crypto wallet." },
+    { num: "03", title: "Embed or Share Link", desc: "Copy your /pay link, embed the widget script, or install the WooCommerce plugin." },
+    { num: "04", title: "Verify & Fulfill", desc: "Confirm customer payment claims in your dashboard to auto-complete orders." },
   ];
 
   return (
-    <section className="max-w-5xl mx-auto px-6 py-20">
-      <div className="text-center mb-14">
-        <span className="text-xs font-bold uppercase tracking-widest text-[#CCFF00] mb-3 block">
-          Getting Started
-        </span>
-        <h2 className="text-4xl sm:text-5xl font-extrabold text-white">
-          Up and running in 2 minutes
+    <section className="max-w-6xl mx-auto px-6 py-24">
+      <div className="text-center mb-16">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neutral-900 border border-neutral-800 text-[11px] font-mono font-semibold text-neutral-300 mb-4 shadow-sm">
+          <Zap size={12} className="text-primary" /> Rapid Setup
+        </div>
+        <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight">
+          Live and Collecting in 2 Minutes
         </h2>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-        {steps.map((s) => (
-          <div key={s.num} className="bg-[#171717] border border-neutral-800 rounded-3xl p-8 flex gap-5 hover:border-neutral-700 transition-colors">
-            <div className="w-10 h-10 shrink-0 rounded-xl bg-[#CCFF00] flex items-center justify-center font-black text-black text-lg">
-              {s.num}
-            </div>
-            <div>
-              <h3 className="font-bold text-white text-lg mb-2">{s.title}</h3>
-              <p className="text-sm text-neutral-400 leading-relaxed">{s.desc}</p>
-            </div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {steps.map((st) => (
+          <div key={st.num} className="bg-surface border border-neutral-800 rounded-2xl p-6 relative">
+            <span className="text-xs font-mono font-bold text-primary block mb-3">{st.num}</span>
+            <h4 className="text-sm font-bold text-white mb-1.5">{st.title}</h4>
+            <p className="text-xs text-neutral-400 leading-relaxed">{st.desc}</p>
           </div>
         ))}
       </div>
-      <div className="mt-10 text-center">
+
+      <div className="mt-12 text-center">
         <Link
           href="/sign-up"
-          id="getstarted-cta"
-          className="inline-flex items-center gap-2 bg-[#CCFF00] text-black font-black px-10 py-4 rounded-2xl text-base hover:brightness-95 active:scale-95 transition-all shadow-[0_0_30px_rgba(204,255,0,0.25)]"
+          className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-primary text-black font-bold text-sm hover:brightness-105 transition-all shadow-[0_0_20px_rgba(197,248,42,0.2)]"
         >
-          Create Your Free Account <ArrowRight size={18} />
+          Create Your Free Account <ArrowRight size={16} />
         </Link>
       </div>
     </section>
@@ -467,51 +620,37 @@ function GetStarted() {
 }
 
 /* ─────────────────────────────────────────────
-   OPEN SOURCE CTA
+   OPEN SOURCE BANNER
 ───────────────────────────────────────────── */
-function OpenSourceCTA() {
+function OpenSourceBanner() {
   return (
-    <section id="open-source" className="max-w-4xl mx-auto px-6 py-24 scroll-mt-20">
-      <div className="relative bg-[#171717] border border-[#CCFF00]/20 rounded-3xl p-10 sm:p-16 overflow-hidden text-center">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#CCFF00]/5 via-transparent to-transparent pointer-events-none rounded-3xl" />
-        <div className="relative z-10">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#CCFF00]/10 border border-[#CCFF00]/20 text-[#CCFF00] text-xs font-bold mb-6">
-            <GithubIcon size={14} /> Open Source on GitHub
-          </div>
-          <h2 className="text-4xl sm:text-5xl font-black text-white mb-5">
-            Free &amp; Open Source.
-            <br />
-            <span className="text-[#CCFF00]">No strings attached.</span>
-          </h2>
-          <p className="text-neutral-400 max-w-xl mx-auto leading-relaxed mb-8">
-            PakPayment is 100% free — no subscription, no transaction fee, no premium tier. The entire source code is open on GitHub. Self-host it, contribute to it, or fork it.
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <a
-              href="https://github.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              id="github-cta"
-              className="flex items-center gap-2 bg-white text-black font-bold px-7 py-3.5 rounded-xl hover:bg-neutral-100 transition-colors"
-            >
-              <GithubIcon size={18} /> View on GitHub
-            </a>
-            <Link
-              href="/sign-up"
-              id="open-source-signup"
-              className="flex items-center gap-2 bg-[#CCFF00] text-black font-bold px-7 py-3.5 rounded-xl hover:brightness-95 transition-all shadow-[0_0_20px_rgba(204,255,0,0.2)]"
-            >
-              Create Free Account <ArrowRight size={16} />
-            </Link>
-          </div>
-          <div className="mt-10 flex flex-wrap justify-center gap-6 text-sm text-neutral-400">
-            {["MIT License", "Self-hostable", "Next.js 16", "MongoDB", "No vendor lock-in"].map((b) => (
-              <div key={b} className="flex items-center gap-2">
-                <Star size={13} className="text-[#CCFF00]" />
-                <span>{b}</span>
-              </div>
-            ))}
-          </div>
+    <section className="w-full bg-surface/40 border-y border-border/80 py-16 px-6">
+      <div className="max-w-4xl mx-auto text-center space-y-4">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neutral-900 border border-neutral-800 text-xs font-mono text-neutral-300">
+          <GithubIcon size={14} className="text-primary" /> Open Source &amp; Transparent
+        </div>
+        <h2 className="text-2xl sm:text-3xl font-black text-white">
+          Free &amp; Open Source. Self-Hostable Anytime.
+        </h2>
+        <p className="text-xs sm:text-sm text-neutral-400 max-w-xl mx-auto leading-relaxed">
+          PakPayment is 100% free with no hidden transaction fees or premium tiers. The codebase is fully open under the MIT License for the Pakistani developer community.
+        </p>
+
+        <div className="pt-2 flex flex-wrap items-center justify-center gap-4">
+          <a
+            href="https://github.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-neutral-900 border border-neutral-800 text-xs font-bold text-neutral-200 hover:text-white hover:border-neutral-700 transition-colors"
+          >
+            <GithubIcon size={15} /> Star on GitHub
+          </a>
+          <Link
+            href="/sign-up"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-primary text-black text-xs font-bold hover:brightness-105 transition-all"
+          >
+            Launch Hosted Dashboard
+          </Link>
         </div>
       </div>
     </section>
@@ -519,63 +658,44 @@ function OpenSourceCTA() {
 }
 
 /* ─────────────────────────────────────────────
-   FINAL CTA
+   BOTTOM CALL TO ACTION
 ───────────────────────────────────────────── */
-function FinalCTA({ isLoggedIn }: { isLoggedIn: boolean }) {
+function BottomCTA({ isLoggedIn }: { isLoggedIn: boolean }) {
   return (
-    <section className="max-w-4xl mx-auto px-6 py-24 text-center">
-      <div className="relative bg-gradient-to-br from-[#CCFF00]/10 via-neutral-900 to-[#FF8C42]/5 border border-neutral-800 rounded-3xl p-12 sm:p-20 overflow-hidden">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-48 rounded-full bg-[#CCFF00]/10 blur-[80px] pointer-events-none" />
-        <div className="relative z-10">
-          <h2 className="text-4xl sm:text-6xl font-black text-white leading-tight mb-5">
-            {isLoggedIn ? (
-              <>Welcome back.<br /><span className="text-[#CCFF00]">Your dashboard awaits.</span></>
-            ) : (
-              <>Start accepting payments<br /><span className="text-[#CCFF00]">today. For free.</span></>
-            )}
-          </h2>
-          <p className="text-neutral-400 max-w-lg mx-auto leading-relaxed mb-10">
-            {isLoggedIn
-              ? "Head to your dashboard to review payment claims, check analytics, and manage your accounts."
-              : "Join thousands of Pakistani freelancers, sellers, and shop owners who collect payments directly — no middleman, no fees, no hassle."}
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            {isLoggedIn ? (
+    <section className="max-w-5xl mx-auto px-6 py-24 text-center">
+      <div className="bg-gradient-to-b from-surface to-neutral-950 border border-neutral-800 rounded-3xl p-10 sm:p-14 space-y-6 shadow-2xl relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
+
+        <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight">
+          Ready to Eliminate Gateway Commissions?
+        </h2>
+        <p className="text-sm sm:text-base text-neutral-400 max-w-xl mx-auto leading-relaxed">
+          Join Pakistani businesses collecting direct bank and wallet payments with zero middleman deductions.
+        </p>
+
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
+          {isLoggedIn ? (
+            <Link
+              href="/dashboard"
+              className="bg-primary text-black font-bold px-8 py-3.5 rounded-xl text-sm hover:brightness-105 transition-all shadow-[0_0_20px_rgba(197,248,42,0.25)] flex items-center gap-2"
+            >
+              Go to Merchant Dashboard <ArrowRight size={16} />
+            </Link>
+          ) : (
+            <>
               <Link
-                href="/dashboard"
-                id="final-cta-dashboard"
-                className="flex items-center gap-2 bg-[#CCFF00] text-black font-black px-10 py-4 rounded-2xl text-lg hover:brightness-95 active:scale-95 transition-all shadow-[0_0_40px_rgba(204,255,0,0.3)]"
+                href="/sign-up"
+                className="bg-primary text-black font-bold px-8 py-3.5 rounded-xl text-sm hover:brightness-105 transition-all shadow-[0_0_20px_rgba(197,248,42,0.25)] flex items-center gap-2"
               >
-                Open Dashboard <ArrowRight size={20} />
+                Create Free Account <ArrowRight size={16} />
               </Link>
-            ) : (
-              <>
-                <Link
-                  href="/sign-up"
-                  id="final-cta-signup"
-                  className="flex items-center gap-2 bg-[#CCFF00] text-black font-black px-10 py-4 rounded-2xl text-lg hover:brightness-95 active:scale-95 transition-all shadow-[0_0_40px_rgba(204,255,0,0.3)]"
-                >
-                  Create Free Account <ArrowRight size={20} />
-                </Link>
-                <Link
-                  href="/sign-in"
-                  id="final-cta-signin"
-                  className="flex items-center gap-2 bg-neutral-900 border border-neutral-700 text-neutral-300 hover:text-white px-8 py-4 rounded-2xl text-base font-bold transition-colors"
-                >
-                  Sign In to Dashboard <ExternalLink size={16} />
-                </Link>
-              </>
-            )}
-          </div>
-          {!isLoggedIn && (
-            <div className="mt-8 flex flex-wrap justify-center gap-5 text-xs text-neutral-500 font-semibold">
-              {["No credit card", "No KYC", "No fees ever", "Open source"].map((b) => (
-                <span key={b} className="flex items-center gap-1.5">
-                  <CheckCircle2 size={12} className="text-[#CCFF00]" />
-                  {b}
-                </span>
-              ))}
-            </div>
+              <Link
+                href="/sign-in"
+                className="bg-neutral-900 border border-neutral-800 text-neutral-300 hover:text-white px-8 py-3.5 rounded-xl text-sm font-semibold transition-colors"
+              >
+                Sign In
+              </Link>
+            </>
           )}
         </div>
       </div>
@@ -587,80 +707,39 @@ function FinalCTA({ isLoggedIn }: { isLoggedIn: boolean }) {
    FOOTER
 ───────────────────────────────────────────── */
 function Footer() {
-  const cols = [
-    {
-      title: "Product",
-      links: [
-        { label: "Features", href: "#features" },
-        { label: "How It Works", href: "#how-it-works" },
-        { label: "Use Cases", href: "#use-cases" },
-      ],
-    },
-    {
-      title: "Account",
-      links: [
-        { label: "Create Account", href: "/sign-up" },
-        { label: "Sign In", href: "/sign-in" },
-        { label: "Dashboard", href: "/dashboard" },
-        { label: "Forgot Password", href: "/forgot-password" },
-      ],
-    },
-    {
-      title: "Developers",
-      links: [
-        { label: "GitHub", href: "https://github.com" },
-        { label: "Embed Widget", href: "/dashboard/embed" },
-        { label: "API Docs", href: "#" },
-        { label: "Self-host Guide", href: "#" },
-      ],
-    },
-  ];
-
   return (
-    <footer className="border-t border-neutral-900 bg-black">
-      <div className="max-w-6xl mx-auto px-6 py-16">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-10 mb-14">
-          <div className="col-span-2 md:col-span-1">
-            <Link href="/" className="flex items-center gap-2.5 mb-4">
-              <div className="w-8 h-8 rounded-xl bg-[#CCFF00] flex items-center justify-center text-black font-black text-sm">
-                P
-              </div>
-              <span className="font-extrabold text-white">
-                Pak<span className="text-[#CCFF00]">Payment</span>
-              </span>
-            </Link>
-            <p className="text-xs text-neutral-500 leading-relaxed max-w-[200px]">
-              Free, open-source, zero-custody payment collection for Pakistan.
-            </p>
-            <div className="mt-4 flex items-center gap-3">
-              <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="text-neutral-500 hover:text-white transition-colors">
-                <GithubIcon size={18} />
-              </a>
-              <a href="https://t.me" target="_blank" rel="noopener noreferrer" className="text-neutral-500 hover:text-white transition-colors">
-                <TrendingUp size={18} />
-              </a>
+    <footer className="w-full border-t border-border/80 bg-neutral-950 py-12 px-6">
+      <div className="max-w-6xl mx-auto space-y-8">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
+          <div className="flex items-center gap-2.5">
+            <div className="w-7 h-7 rounded-lg bg-primary flex items-center justify-center text-black font-black text-sm">
+              P
             </div>
+            <span className="font-extrabold text-sm text-white tracking-tight">PakPayment</span>
+            <span className="text-xs text-neutral-500 font-mono ml-2">© 2026 Direct Rails</span>
           </div>
-          {cols.map((c) => (
-            <div key={c.title}>
-              <h4 className="text-xs font-bold uppercase tracking-widest text-neutral-500 mb-4">{c.title}</h4>
-              <ul className="space-y-3">
-                {c.links.map((l) => (
-                  <li key={l.label}>
-                    <a href={l.href} className="text-sm text-neutral-400 hover:text-white transition-colors">
-                      {l.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+
+          <div className="flex flex-wrap items-center justify-center gap-6 text-xs text-neutral-400">
+            <a href="#integrations" className="hover:text-white transition-colors">Integrations</a>
+            <a href="#architecture" className="hover:text-white transition-colors">Architecture</a>
+            <a href="#rails" className="hover:text-white transition-colors">Payment Rails</a>
+            <a href="#faq" className="hover:text-white transition-colors">FAQ</a>
+            <Link href="/sign-in" className="hover:text-white transition-colors">Merchant Portal</Link>
+          </div>
         </div>
-        <div className="border-t border-neutral-900 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-neutral-600">
-          <p>© {new Date().getFullYear()} PakPayment. Free direct payment infrastructure. Zero custody of funds.</p>
-          <div className="flex items-center gap-4">
-            <span className="px-2.5 py-1 rounded-full bg-neutral-900 border border-neutral-800 text-neutral-500">MIT License</span>
-            <span className="px-2.5 py-1 rounded-full bg-[#CCFF00]/10 border border-[#CCFF00]/20 text-[#CCFF00]">Open Source</span>
+
+        <div className="pt-6 border-t border-neutral-800/80 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-neutral-500">
+          <p>© 2026 PakPayment — Free &amp; Open Source non-custodial direct payment architecture.</p>
+          <div className="flex items-center gap-1.5 text-neutral-400">
+            <span>Created by</span>
+            <a
+              href="https://muhammadanzamuneebkhan.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white hover:text-primary font-semibold transition-colors underline underline-offset-4 decoration-primary/40 hover:decoration-primary"
+            >
+              Muhammad Anza Muneeb Khan
+            </a>
           </div>
         </div>
       </div>
@@ -669,31 +748,29 @@ function Footer() {
 }
 
 /* ─────────────────────────────────────────────
-   PAGE ROOT — Server Component
+   MAIN PAGE EXPORT (SERVER COMPONENT)
 ───────────────────────────────────────────── */
-export default async function Home() {
+export default async function HomePage() {
   const session = await getServerSession();
-  const isLoggedIn = !!session?.user?.id;
+  const isLoggedIn = !!session?.user;
 
   return (
-    <div className="flex flex-col min-h-screen bg-black font-sans text-white selection:bg-[#CCFF00] selection:text-black overflow-x-hidden">
-      {/* Auth-aware navbar — client component */}
+    <div className="min-h-screen bg-background text-foreground flex flex-col">
       <LandingNavbar isLoggedIn={isLoggedIn} />
-
       <main className="flex-1">
         <Hero isLoggedIn={isLoggedIn} />
         <StatsBar />
         <LandingPlatformShowcase />
         <LandingArchitecture />
         <HowItWorks />
-        <PaymentMethods />
+        <PaymentRails />
         <Features />
-        <UseCases />
-        <GetStarted />
-        <OpenSourceCTA />
-        {/* FAQ needs useState — client component */}
+        <TwoWaysToUse />
+        <WhoIsItFor />
+        <GettingStarted />
+        <OpenSourceBanner />
         <LandingFAQ />
-        <FinalCTA isLoggedIn={isLoggedIn} />
+        <BottomCTA isLoggedIn={isLoggedIn} />
       </main>
       <Footer />
     </div>

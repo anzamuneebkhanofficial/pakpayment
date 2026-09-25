@@ -38,7 +38,7 @@ export default function DashboardNav() {
   ];
 
   return (
-    <nav className="space-y-1.5">
+    <nav className="space-y-1">
       {navigation.map((item) => {
         const Icon = item.icon;
         const isActive = pathname === item.href;
@@ -47,14 +47,22 @@ export default function DashboardNav() {
           <Link
             key={item.name}
             href={item.href}
-            className={`flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all ${
+            className={`group relative flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold tracking-wide transition-all ${
               isActive
-                ? 'bg-primary text-black font-semibold shadow-[0_0_15px_rgba(204,255,0,0.15)]'
-                : 'text-neutral-400 hover:text-white hover:bg-neutral-900/80'
+                ? 'bg-neutral-900 text-white border border-neutral-800 shadow-sm'
+                : 'text-neutral-400 hover:text-white hover:bg-neutral-900/50'
             }`}
           >
-            <Icon size={18} className={isActive ? 'text-black' : 'text-neutral-400 group-hover:text-white'} />
-            <span>{item.name}</span>
+            {isActive && (
+              <span className="absolute left-0 top-2 bottom-2 w-1 rounded-r-full bg-primary" />
+            )}
+            <Icon
+              size={17}
+              className={`shrink-0 transition-colors ${
+                isActive ? 'text-primary' : 'text-neutral-400 group-hover:text-white'
+              }`}
+            />
+            <span className="truncate">{item.name}</span>
           </Link>
         );
       })}
