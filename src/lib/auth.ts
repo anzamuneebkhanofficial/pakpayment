@@ -4,13 +4,30 @@ import { MongoClient } from "mongodb";
 import { sendEmail } from "./email";
 
 const uri = process.env.MONGODB_URI || "mongodb://localhost:27017/pakpayment";
-const client = new MongoClient(uri);
+
+let client: MongoClient;
+declare global {
+  var _mongoAuthClient: MongoClient | undefined;
+}
+
+if (!global._mongoAuthClient) {
+  global._mongoAuthClient = new MongoClient(uri, {
+    maxPoolSize: 10,
+    serverSelectionTimeoutMS: 8000,
+  });
+}
+client = global._mongoAuthClient;
 const db = client.db();
 
-const appUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
+const appUrl = process.env.NEXT_PUBLIC_APP_URL || process.env.BETTER_AUTH_URL || "http://localhost:3000";
 
 export const auth = betterAuth({
   database: mongodbAdapter(db),
+  trustedOrigins: [
+    appUrl,
+    "https://pakpayment.vercel.app",
+    "http://localhost:3000",
+  ],
   emailAndPassword: {
     enabled: true,
     autoSignIn: true,
